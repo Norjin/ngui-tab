@@ -7,7 +7,7 @@
     /* global angular */
     var nguiModule = angular.module('ngui-tab', []);
 
-    nguiModule.provider("$nguiConfig", function () {
+    nguiModule.provider("$nguiTabConfig", function () {
         var baseTemplateUrl = "/tpl-bootstrap";
 
         return {
@@ -23,8 +23,8 @@
             }
         };
     })
-    nguiModule.directive('nguiTab', ['$nguiConfig', '$nguiTab',
-        function ($nguiConfig, $nguiTab) {
+    nguiModule.directive('nguiTab', ['$nguiTabConfig', '$nguiTab',
+        function ($nguiTabConfig, $nguiTab) {
             return {
                 restrict: 'A',
                 transclude: true,
@@ -33,7 +33,7 @@
                     tab: '=nguiTab'
                 },
                 templateUrl: function (elem, attrs) {
-                    return attrs.templateUrl || $nguiConfig.baseTemplateUrl + '/tab.htm';
+                    return attrs.templateUrl || $nguiTabConfig.baseTemplateUrl + '/tab.htm';
                 },
                 controller: function ($scope) {
                     var $tab = $scope.$tab = $scope.tab || $nguiTab();
@@ -51,8 +51,8 @@
         }
     ]);
 
-    nguiModule.directive('nguiTabPanel', ['$nguiConfig',
-        function ($nguiConfig) {
+    nguiModule.directive('nguiTabPanel', ['$nguiTabConfig',
+        function ($nguiTabConfig) {
             return {
                 restrict: 'A',
                 transclude: true,
@@ -64,7 +64,7 @@
                     active: '@', activeVar: '='
                 },
                 templateUrl: function (elem, attrs) {
-                    return attrs.templateUrl || $nguiConfig.baseTemplateUrl + '/tab-panel.htm';
+                    return attrs.templateUrl || $nguiTabConfig.baseTemplateUrl + '/tab-panel.htm';
                 },
                 link: function ($scope, $elem, attr, $tab) {
                     if (!$scope.name) {
